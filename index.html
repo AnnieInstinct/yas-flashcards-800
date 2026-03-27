@@ -1070,16 +1070,20 @@ loadLearned(); buildDeck(); setTimeout(adjustLayout,50); renderRecap('en');
 function toggleFilters() {
   var f = document.getElementById('filters');
   var btn = document.getElementById('filter-toggle-btn');
-  var isOpen = f.classList.contains('filters-open');
   f.classList.toggle('filters-open');
   btn.classList.toggle('active');
-  // After closing filters, scroll card into view smoothly
-  if (isOpen) {
-    setTimeout(function() {
-      var wrap = document.getElementById('card-wrap');
-      if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-  }
+  // Always scroll card into view after toggle
+  setTimeout(function() {
+    var wrap = document.getElementById('card-wrap');
+    if (wrap) {
+      var rect = wrap.getBoundingClientRect();
+      var topbar = document.getElementById('topbar');
+      var filters = document.getElementById('filters');
+      var offset = (topbar ? topbar.offsetHeight : 52) + (filters.classList.contains('filters-open') ? filters.offsetHeight : 0) + 16;
+      var scrollTarget = window.pageYOffset + rect.top - offset;
+      window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    }
+  }, 80);
 }
 
 </script>
