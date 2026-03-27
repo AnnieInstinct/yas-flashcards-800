@@ -1072,18 +1072,17 @@ function toggleFilters() {
   var btn = document.getElementById('filter-toggle-btn');
   f.classList.toggle('filters-open');
   btn.classList.toggle('active');
-  // Always scroll card into view after toggle
   setTimeout(function() {
-    var wrap = document.getElementById('card-wrap');
-    if (wrap) {
-      var rect = wrap.getBoundingClientRect();
-      var topbar = document.getElementById('topbar');
-      var filters = document.getElementById('filters');
-      var offset = (topbar ? topbar.offsetHeight : 52) + (filters.classList.contains('filters-open') ? filters.offsetHeight : 0) + 16;
-      var scrollTarget = window.pageYOffset + rect.top - offset;
-      window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    var topbar = document.getElementById('topbar');
+    var topbarH = topbar ? topbar.offsetHeight : 52;
+    var filtersH = f.classList.contains('filters-open') ? f.offsetHeight : 0;
+    var totalOffset = topbarH + filtersH + 8;
+    var target = document.getElementById('sub-stats') || document.getElementById('card-counter') || document.getElementById('card-wrap');
+    if (target) {
+      var targetTop = target.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
     }
-  }, 80);
+  }, 120);
 }
 
 </script>
