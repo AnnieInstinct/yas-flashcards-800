@@ -31,6 +31,24 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,san
 }
 .lang-btn.active{background:#8a6e00;color:#fff;}
 
+
+/* ── MOBILE FILTER TOGGLE ── */
+@media (max-width: 768px) {
+  #filters { display: none; }
+  #filters.filters-open { display: flex; }
+  #filter-toggle-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #f0efed; border: 1.5px solid #ccc; border-radius: 20px;
+    padding: 5px 12px; font-size: 12px; font-weight: 700;
+    color: #555; cursor: pointer; letter-spacing: .5px;
+  }
+  #filter-toggle-btn.active { background: #8a6e00; color: #fff; border-color: #8a6e00; }
+}
+@media (min-width: 769px) {
+  #filter-toggle-btn { display: none; }
+  #filters { display: flex !important; }
+}
+
 /* ── FILTERS ── */
 #filters{position:fixed;top:52px;left:0;right:0;z-index:99;background:#f0efed;border-bottom:1px solid #e0ddd8;padding:10px 28px 0;display:flex;flex-direction:column;}
 .filter-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #e8e5e0;flex-wrap:wrap;}
@@ -192,6 +210,7 @@ input:checked+.slider:before{transform:translateX(16px)}
       <span style="cursor:pointer;text-decoration:underline;text-decoration-style:dotted;" onclick="toggleLearnedView()" title="Clicca per vedere le carte imparate"><b id="ts-learned">0</b> <span id="lbl-learned">learned</span></span>
     </div>
 
+      <button id="filter-toggle-btn" onclick="toggleFilters()" aria-label="Toggle filters">⚙ Filters</button>
   </div>
 </div>
 
@@ -1047,6 +1066,14 @@ loadLearned(); buildDeck(); setTimeout(adjustLayout,50); renderRecap('en');
   if (document.readyState !== 'loading') { initTouch(); }
   else { document.addEventListener('DOMContentLoaded', initTouch); }
 })();
+
+function toggleFilters() {
+  var f = document.getElementById('filters');
+  var btn = document.getElementById('filter-toggle-btn');
+  f.classList.toggle('filters-open');
+  btn.classList.toggle('active');
+}
+
 </script>
 </body>
 </html>
