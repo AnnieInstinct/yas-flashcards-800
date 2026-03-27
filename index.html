@@ -34,10 +34,10 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,san
 
 /* ── MOBILE FILTER TOGGLE ── */
 @media (max-width: 768px) {
-  #filters { display: none; }
-  #filters.filters-open { display: flex; }
+  #filters { display: none !important; }
+  #filters.filters-open { display: flex !important; }
   #filter-toggle-btn {
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex !important; align-items: center; gap: 5px;
     background: #f0efed; border: 1.5px solid #ccc; border-radius: 20px;
     padding: 5px 12px; font-size: 12px; font-weight: 700;
     color: #555; cursor: pointer; letter-spacing: .5px;
@@ -45,7 +45,7 @@ html,body{height:100%;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,san
   #filter-toggle-btn.active { background: #8a6e00; color: #fff; border-color: #8a6e00; }
 }
 @media (min-width: 769px) {
-  #filter-toggle-btn { display: none; }
+  #filter-toggle-btn { display: none !important; }
   #filters { display: flex !important; }
 }
 
